@@ -3,7 +3,7 @@
 Team members: Dingyi Nie, Daniel Kim, Younwoo Roh, Timothy Lin
 
 ## Searching and Indexing Video with Input Clip
-This repository contains our CSCI 576: Multimedia Design Final Project. The project's aim is as follows: Given an input video clip with accompanying audio, the program will search through a database of videos with accompanying audio and determine which database video the input video clip is from and when it starts in the original.
+This repository hosts our final project for CSCI 576: Multimedia Design. The project is designed to take an input video clip along with its audio and identify which video from a database it originates from. Additionally, the program will determine the exact starting point of the clip within the original video.
 
 ## Setup
 In the root directory of this repository, run the following:
