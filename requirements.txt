@@ -1,2 +1,4 @@
 scenedetect<0.7
 opencv-python
+pygame
+Pillow
