@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk 
 import cv2
 import os
 
@@ -93,14 +93,11 @@ class VideoPlayer:
         #where the sliding window algo takes place and calculate 
         return 30
 
-def main():
-    root = tk.Tk()
-    player = VideoPlayer(root)
-    video_path = player.decide_video_to_play()
-    start_time = player.calculate_start_time()
-    player.load_video(video_path, start_time=start_time)   
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     root = tk.Tk()
+#     player = VideoPlayer(root)
+#     video_path = player.decide_video_to_play()
+#     start_time = player.calculate_start_time()
+#     player.load_video(video_path, start_time=start_time)   
+#     root.mainloop()
 

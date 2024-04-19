@@ -1,4 +1,6 @@
 from scenedetect import detect, ContentDetector
+from UI import VideoPlayer
+import tkinter as tk
 
 class QueryVideo:
     """
@@ -20,7 +22,12 @@ class QueryVideo:
         """
         # Analyze framestats and scenes of input query video 
         self.__analyze_framestats_scenes()
-        pass
+
+        # Output video UI of original video at correct timestamp
+        root = tk.Tk()
+        player = VideoPlayer(root)
+        player.load_video(self.original_video, start_time=self.video_timestamp)   
+        root.mainloop()
     
 
     def __analyze_framestats_scenes(self):
