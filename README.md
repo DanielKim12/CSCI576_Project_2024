@@ -15,10 +15,10 @@ python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
-main.py : Main file used to run program. Prompts user for input query video filepath via terminal.
-
-Queries/ : Contains input query videos.
-Videos/ : Contains database of videos we are searching through.
-VideoStats/ : Contains CSVs about each video with information about framestats and scenes. Also contains code used to calculate these CSVs.
-QueryVideo.py : Helper class to contain information about and calculate each query.
-UI.py: Helper class to display results of query (original video at correct timestamp)
+main.py : Main file used to run program. Prompts user for input query video filepath via terminal.<br />
+<br />
+Queries/ : Contains input query videos.<br />
+Videos/ : Contains database of videos we are searching through.<br />
+VideoStats/ : Contains CSVs about each video with information about framestats and scenes. Also contains code used to calculate these CSVs.<br />
+QueryVideo.py : Helper class to contain information about and calculate each query.<br />
+UI.py: Helper class to display results of query (original video at correct timestamp)<br />
