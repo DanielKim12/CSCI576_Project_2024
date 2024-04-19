@@ -11,6 +11,7 @@ class QueryVideo:
         self.stats_outpath = "query_framestats.csv"
         self.scenes_outpath = "query_scenes.csv"
 
+        # Update with correct query results 
         self.original_video = ""
         self.video_timestamp = ""
         self.video_frame_number = -1
@@ -22,6 +23,8 @@ class QueryVideo:
         """
         # Analyze framestats and scenes of input query video 
         self.__analyze_framestats_scenes()
+
+        self.__find_original_video_and_frame()
 
         # Output video UI of original video at correct timestamp
         root = tk.Tk()
