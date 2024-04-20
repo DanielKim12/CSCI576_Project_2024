@@ -1,7 +1,5 @@
 .DS_Store
 
-data/queries/*
-!data/queries/.gitkeep
+data/queries/*.mp4
 
-data/videos/*
-!data/videos/.gitkeep
+data/videos/*.mp4

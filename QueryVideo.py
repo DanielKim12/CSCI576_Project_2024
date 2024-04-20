@@ -1,8 +1,8 @@
-from scenedetect import detect, ContentDetector
-from UI import VideoPlayer
+# from scenedetect import detect, ContentDetector
+from gui import VideoPlayer
 import tkinter as tk
 
-class QueryVideo:
+class MyIndexer:
     """
     Class to hold information about an input query video and perform the query.
     """
