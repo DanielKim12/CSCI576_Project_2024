@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from PIL import Image, ImageTk 
+from PIL import Image, ImageTk
 import cv2
 import os
 
@@ -8,10 +8,11 @@ class VideoPlayer:
     def __init__(self, root):
         self.root = root
         self.root.title("Video Player")
-
-        # Initialize video capture
+        self.video_path = ''
+        self.start_time = 0
         self.cap = None
         self.paused = False
+        self.after_id = None
 
         # Create a label to display video frames
         self.video_label = tk.Label(root)
@@ -21,7 +22,7 @@ class VideoPlayer:
         self.start_button = ttk.Button(root, text="▶ Start", command=self.start_video, style="ControlButton.TButton")
         self.start_button.pack(side=tk.LEFT)
 
-        self.refresh_button = ttk.Button(root, text="⟳ Refresh", command=self.refresh_video, style="ControlButton.TButton")
+        self.refresh_button = ttk.Button(root, text="⟳ Refresh", command=lambda: self.load_video(self.video_path, self.start_time), style="ControlButton.TButton")
         self.refresh_button.pack(side=tk.LEFT)
 
         self.pause_button = ttk.Button(root, text="❚❚ Pause", command=self.pause_video, style="ControlButton.TButton")
@@ -35,69 +36,51 @@ class VideoPlayer:
         self.photo = None
 
     def load_video(self, video_path, start_time=0):
-        if not os.path.exists(video_path):
+        self.video_path = video_path
+        self.start_time = start_time
+
+        if not os.path.exists(self.video_path):
             messagebox.showerror("Error", "Video file not found.")
             return
-
-        self.cap = cv2.VideoCapture(video_path)
+        
+        self.cap = cv2.VideoCapture(self.video_path)
         if not self.cap.isOpened():
             messagebox.showerror("Error", "Failed to load video.")
             return
 
-        # Set the frame position to the desired time point
-        frame_pos = int(start_time * self.cap.get(cv2.CAP_PROP_FPS))
+        # Set the frame position
+        frame_pos = int(self.start_time * self.cap.get(cv2.CAP_PROP_FPS))
         self.cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos)
 
-        self.display_frame()
+        self.start_video()
 
     def display_frame(self):
-        # Capture frame-by-frame
+        if self.paused:
+            return
+        
         ret, frame = self.cap.read()
-
         if ret:
-            # Convert the image from BGR (CV2 default) to RGB
             cv_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             pil_image = Image.fromarray(cv_image)
-
-            # Update the image of the label to display the frame
             self.photo = ImageTk.PhotoImage(image=pil_image)
             self.video_label.configure(image=self.photo)
-            self.video_label.image = self.photo
-
-            if not self.paused:
-                self.video_label.after(30, self.display_frame)  # Adjust timing based on video fps
+            # self.video_label.image = self.photo
+            if self.after_id is not None:
+                self.root.after_cancel(self.after_id)
+            self.after_id = self.video_label.after(int(1000 / self.cap.get(cv2.CAP_PROP_FPS)), self.display_frame)
         else:
             self.refresh_video()
 
     def start_video(self):
-        if self.paused:
-            self.paused = False
-            self.display_frame()
+        if self.after_id is not None:
+            self.root.after_cancel(self.after_id)
+        self.paused = False
+        self.display_frame()
 
     def refresh_video(self):
-        if self.cap is not None:
-            self.cap.release()
-            start_time = self.calculate_start_time()
-            video_path = self.decide_video_to_play()
-            self.load_video(video_path,start_time=start_time)
+        if self.after_id is not None:
+            self.root.after_cancel(self.after_id)
+        self.load_video(self.video_path, self.start_time)
 
     def pause_video(self):
         self.paused = True
-        
-    def decide_video_to_play(self):
-        # Implement the logic to decide which video to play dynamically
-        # For demonstration purposes, returning a hardcoded video path
-        return './data/Videos/video10.mp4'
-        
-    def calculate_start_time(self):
-        #where the sliding window algo takes place and calculate 
-        return 30
-
-# def main():
-#     root = tk.Tk()
-#     player = VideoPlayer(root)
-#     video_path = player.decide_video_to_play()
-#     start_time = player.calculate_start_time()
-#     player.load_video(video_path, start_time=start_time)   
-#     root.mainloop()
-
