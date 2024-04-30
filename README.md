@@ -14,12 +14,12 @@ conda activate multimedia
 ```
 
 ## Usage
-main.py : Main file used to run program. Prompts user for input query video filepath via terminal, prints out results, and displays original video. Once the terminal prompts for a query video, simply input the path to the query video and it should output the result on your browser.<br />
+main.py : Main file used to run program. Once the terminal prompts for a query video, the user can repeatedly input relative paths to query videos and it will output the result on the user's browser.<br />
 
 ```bash
 python3.10 main.py
 ```
 <br />
 data/ : Contains input query videos, original videos, and precomputed data.<br />
-vindex.py/ : Contains helper functions and class managing algorithm<br />
-templates/ : Contains html for web player
+vindex.py/ : Contains helper functions and class managing algorithm.<br />
+templates/ : Contains html for web player.
