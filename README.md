@@ -6,19 +6,20 @@ Team members: Dingyi Nie, Daniel Kim, Younwoo Roh, Timothy Lin
 This repository hosts our final project for CSCI 576: Multimedia Design. The project is designed to take an input video clip along with its audio and identify which video from a database it originates from. Additionally, the program will determine the exact starting point of the clip within the original video.
 
 ## Setup
-In the root directory of this repository, run the following:
+Please ensure videos are stored under data/videos and that conda is already installed! In the root directory of this repository, run the following:
 
 ```bash
-python3 -m venv env
-source env/bin/activate
-python3 -m pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate multimedia
 ```
 
 ## Usage
-main.py : Main file used to run program. Prompts user for input query video filepath via terminal.<br />
+main.py : Main file used to run program. Prompts user for input query video filepath via terminal, prints out results, and displays original video. Once the terminal prompts for a query video, simply input the path to the query video and it should output the result on your browser.<br />
+
+```bash
+python3.10 main.py
+```
 <br />
-Queries/ : Contains input query videos.<br />
-Videos/ : Contains database of videos we are searching through.<br />
-VideoStats/ : Contains CSVs about each video with information about framestats and scenes. Also contains code used to calculate these CSVs.<br />
-QueryVideo.py : Helper class to contain information about and calculate each query.<br />
-UI.py: Helper class to display results of query (original video at correct timestamp)<br />
+data/ : Contains input query videos, original videos, and precomputed data.<br />
+vindex.py/ : Contains helper functions and class managing algorithm<br />
+templates/ : Contains html for web player
