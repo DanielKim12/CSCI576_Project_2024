@@ -3,5 +3,3 @@
 __pycache__/
 
 data/queries/*.mp4
-
-data/videos/*.mp4
